@@ -1,79 +1,147 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.io.*;
+import java.util.*;
+import java.lang.String;
+
 
 public class StudentRegister {
-    ArrayList<Student> students = new ArrayList<>();
-    ArrayList<Course> courses = new ArrayList<>();
-    ArrayList<Attainment> attainments = new ArrayList<>();
+    private final ArrayList<Student> students = new ArrayList<>();
+    private final ArrayList<Course> courses = new ArrayList<>();
+    private final ArrayList<Attainment> attainments = new ArrayList<>();
 
-    StudentRegister() {
+
+
+    StudentRegister(){
 
     }
 
-    public ArrayList<Student> getStudents() {
+    public ArrayList<Student> getStudents(){
         students.sort(Comparator.comparing(Student::getName));
-        return this.students;
+        return students;
+
+
     }
 
-    public ArrayList<Course> getCourses() {
+    public ArrayList<Course> getCourses(){
         courses.sort(Comparator.comparing(Course::getName));
-        return this.courses;
+        return courses;
+
+
     }
 
-    public void addStudent(Student student) {
-        if(!students.contains(student)) {
+
+    public void addStudent(Student student){
+        if(!students.contains(student)){
             students.add(student);
         }
     }
 
-    public void addCourse(Course course) {
-        if(!courses.contains(course)) {
+    public void addCourse(Course course){
+        if(!courses.contains(course)){
             courses.add(course);
         }
+
     }
 
-    public void addAttainment(Attainment att) {
-        if(!attainments.contains(att)) {
+    public void addAttainment(Attainment att){
+        if(!attainments.contains(att)){
             attainments.add(att);
         }
     }
 
-    public void printStudentAttainments(String studentNumber, String order) {
-        if(order.equals("by name")) {
+
+
+    public void printStudentAttainments(String studentNumber, String order){
+        if(order.equals("by name")){
             courses.sort(Comparator.comparing(Course::getName));
-        }
-        if(order.equals("by name")) {
-            courses.sort(Comparator.comparing(Course::getCode));
-        }
-        printStudentAttainments(studentNumber);
-    }
+            for (Student s : students){
+                if (s.getStudentNumber().equals(studentNumber)){
+                    System.out.format("%s (%s):%n", s.getName(), s.getStudentNumber());
+                    for (Course c: courses){
+                        for(Attainment att : attainments){
+                            if(att.getStudentNumber().equals(studentNumber)){
 
-    public void printStudentAttainments(String studentNumber) {
-        List<String> isStudent = new ArrayList<>();
-
-        for(Attainment att : attainments) {
-            if (att.getStudentNumber().equals(studentNumber)) {
-                isStudent.add(studentNumber);
-            }
-        }
-        if(isStudent.size() < 1) {
-            System.out.printf("Unknown student number: %s\n", studentNumber);
-        } else {
-            for(Student s : students) {
-                if(s.getStudentNumber().equals(studentNumber)) {
-                    System.out.printf("%s (%s):\n", s.getName(), studentNumber);
-                    for(Course c : courses) {
-                        for(Attainment att : attainments) {
-                            if(att.getStudentNumber().equals(studentNumber)) {
-                                if(att.getCourseCode().equals(c.getCode())) {
-                                    System.out.printf("  %s %s: %d\n", c.getCode(), c.getName(), att.getGrade());
+                                if (att.getCourseCode().equals(c.getCode())){
+                                    System.out.format("  %s %s: %d%n", c.getCode(), c.getName(), att.getGrade());
                                 }
+
                             }
                         }
                     }
                 }
             }
         }
+        if(order.equals("by code")){
+            courses.sort(Comparator.comparing(Course::getCode));
+            for (Student s : students){
+                if (s.getStudentNumber().equals(studentNumber)){
+                    System.out.format("%s (%s):%n", s.getName(), s.getStudentNumber());
+                    for (Course c: courses){
+                        for(Attainment att : attainments){
+                            if(att.getStudentNumber().equals(studentNumber)){
+
+                                if (att.getCourseCode().equals(c.getCode())){
+                                    System.out.format("  %s %s: %d%n", c.getCode(), c.getName(), att.getGrade());
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
     }
+
+
+
+    public void printStudentAttainments(String studentNumber){
+        List<String> name_check = new ArrayList<>();
+        for(Student s : students){
+            if (s.getStudentNumber().equals(studentNumber)){
+                name_check.add(studentNumber);
+            }
+        }
+        if (name_check.size() < 1){
+            System.out.format("Unknown student number: %s%n",studentNumber);
+        }
+        for (Student s : students){
+            if (s.getStudentNumber().equals(studentNumber)){
+                System.out.format("%s (%s):%n", s.getName(), s.getStudentNumber());
+
+                    for(Attainment att : attainments){
+                        if(att.getStudentNumber().equals(studentNumber)){
+                            for (Course c: courses){
+                                if (att.getCourseCode().equals(c.getCode())){
+                                    System.out.format("  %s %s: %d%n", c.getCode(), c.getName(), att.getGrade());
+                                }
+                            }
+
+
+
+                        }
+                    }
+
+            }
+        }
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
