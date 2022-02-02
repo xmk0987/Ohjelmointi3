@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 import java.lang.String;
+import java.time.format.DateTimeFormatter;
 
 public class Date {
     private int day = 0;
@@ -12,10 +13,15 @@ public class Date {
         this.month = month;
         this.year = year;
 
-
-        if (month > 12 || month < 1 || day > 31 || day < 1 ){
-            throw new DateException(String.format("Illegal date %02d.%02d.%d",day,month,year  ));
+        String datestring = String.format("%02d.%02d.%d", day, month ,year);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.uuuu");
+        try {
+            formatter.parse(datestring);
         }
+        catch(Exception e){
+            throw new DateException(String.format("Illegal date %02d.%02d.%d", day, month ,year));
+        }
+
     }
 
     public int getYear(){
