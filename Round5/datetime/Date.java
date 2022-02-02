@@ -18,15 +18,15 @@ public class Date {
         }
     }
 
-    int getYear(){
+    public int getYear(){
         return this.year;
     }
 
-    int getDay(){
+    public int getDay(){
         return this.day;
     }
 
-    int getMonth(){
+    public int getMonth(){
         return this.month;
     }
 

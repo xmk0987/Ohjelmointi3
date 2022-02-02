@@ -21,15 +21,15 @@ public class DateTime extends Date{
 
     }
 
-    int getHour(){
+    public int getHour(){
         return this.hour;
     }
 
-    int getMinute(){
+    public int getMinute(){
         return this.minute;
     }
 
-    int getSecond(){
+    public int getSecond(){
         return this.second;
     }
 
