@@ -4,10 +4,7 @@ import java.util.*;
 import java.lang.String;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.function.Consumer;
-import static java.lang.Double.parseDouble;
-import static java.lang.Integer.parseInt;
+
 import java.util.Comparator;
 
 public class MovieAnalytics2 {
@@ -31,27 +28,27 @@ public class MovieAnalytics2 {
 
         movies.forEach(x -> {all_directors.add(x.getDirector());});
 
-        LinkedHashMap<String, Long> director_movies = (LinkedHashMap<String, Long>) all_directors.stream()
+        HashMap<String, Long> director_movies = (HashMap<String, Long>) all_directors.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        LinkedHashMap<String, Long> reverseSortedMap = new LinkedHashMap<String, Long>();
+        director_movies.entrySet().stream().sorted(Comparator.comparingDouble(Map.Entry<String, Long>::getValue).reversed().thenComparing(Map.Entry::getKey))
+                .limit(n).forEach(x-> System.out.format("%s: %d movies%n", x.getKey(), x.getValue()));
 
-        director_movies.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
-
-        reverseSortedMap.entrySet().stream().limit(n).forEach(x-> System.out.format("%s: %d movies%n", x.getKey(), x.getValue()));
 
     }
 
     void printAverageDurationByGenre(){
         movies.stream().collect(Collectors.groupingBy(Movie::getGenre, Collectors.averagingDouble(Movie::getDuration)))
-                .forEach((key, value) -> System.out.format("%s: %.2f%n", key, value));
+                .entrySet().stream()
+                .sorted(Comparator.comparingDouble(Map.Entry<String, Double>::getValue).thenComparing(Map.Entry::getKey))
+                .forEach(x -> System.out.format("%s: %.2f%n", x.getKey(), x.getValue()));
 
     }
 
     void printAverageScoreByGenre(){
-        movies.stream().collect(Collectors.groupingBy(Movie::getGenre, Collectors.averagingDouble(Movie::getScore)))
-                .forEach((key, value) -> System.out.format("%s: %.2f%n", key, value));
+        movies.stream().collect(Collectors.groupingBy(Movie::getGenre, Collectors.averagingDouble(Movie::getScore))).entrySet().stream()
+                .sorted(Comparator.comparingDouble(Map.Entry<String, Double>::getValue).reversed().thenComparing(Map.Entry::getKey))
+                .forEach(x -> System.out.format("%s: %.2f%n", x.getKey(), x.getValue()));
 
     }
 
