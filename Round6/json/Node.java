@@ -1,3 +1,4 @@
+
 public abstract class Node {
   public boolean isValue() {
     return this instanceof ValueNode;
@@ -10,15 +11,54 @@ public abstract class Node {
   public boolean isObject() {
     return this instanceof ObjectNode;
   }
-  
+
   public void printSimple() {
     StringBuilder sb = new StringBuilder();
     printSimple(this, sb);
     System.out.print(sb.toString());
   }
 
-  public void printJson() {
-    throw new UnsupportedOperationException("printJson has not been implemented!");
+  public void printJson(){
+    StringBuilder sb = new StringBuilder();
+    printJson(this, sb);
+    System.out.print(sb.toString());
+  }
+
+  private void printJson(Node node, StringBuilder sb) {
+    if(node.isObject()) {
+      sb.append("{").append(NL);
+      ObjectNode objNode = (ObjectNode) node;
+      for(String name : objNode) {
+        sb.append(name).append(": ");
+        printJson(objNode.get(name), sb);
+
+      }
+    }
+    else if(node.isArray()) {
+      sb.append("[").append(NL);
+      ArrayNode arrNode = (ArrayNode) node;
+      for(Node aNode : arrNode) {
+        printJson(aNode, sb);
+      }
+    }
+    else if(node.isValue()) {
+      ValueNode valNode = (ValueNode) node;
+      String typeStr = "NullValue";
+      String valStr = "null";
+      if(valNode.isNumber()) {
+        typeStr = "NumberValue";
+        valStr = numberToString(valNode.getNumber());
+      }
+      else if(valNode.isBoolean()) {
+        typeStr = "BooleanValue";
+        valStr = Boolean.toString(valNode.getBoolean());
+      }
+      else if(valNode.isString()) {
+        typeStr = "StringValue";
+        valStr = "\"" + valNode.getString() + "\"";
+      }
+      sb.append(String.format("%s(%s)%n", typeStr, valStr));
+    }
   }
 
   private static final String NL = System.lineSeparator();
