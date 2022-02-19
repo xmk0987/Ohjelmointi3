@@ -16,7 +16,7 @@ public class MovieAnalytics {
     }
 
     public static Consumer<Movie> showInfo(){
-        return  x -> System.out.format("%s (%s, %d)%n", x.getTitle(), x.getDirector(), x.getReleaseYear() );
+        return  x -> System.out.format("%s (By %s, %d)%n", x.getTitle(), x.getDirector(), x.getReleaseYear() );
     }
 
     void populateWithData(String fileName) throws IOException{
