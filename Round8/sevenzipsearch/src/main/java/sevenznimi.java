@@ -43,9 +43,9 @@ public class sevenznimi {
 
                         }
                     }
-
+                    System.out.println();
                 }
-                System.out.println();
+
 
             }
 
