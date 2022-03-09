@@ -36,7 +36,7 @@ public class sevenznimi {
                         while((line = reader.readLine()) != null){
                             String line2 = line.toLowerCase();
                             if(line2.contains(strHakusana.toLowerCase())){
-                                System.out.println(line.replaceAll("(?i)" + strHakusana, strHakusana.toUpperCase()));
+                                System.out.println(i + ": " +line.replaceAll("(?i)" + strHakusana, strHakusana.toUpperCase()));
 
                             }
                             i+= 1;
