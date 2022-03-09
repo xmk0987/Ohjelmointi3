@@ -5,7 +5,7 @@ import java.io.*;
 import java.lang.*;
 import java.util.*;
 import java.lang.String;
-
+//authors Onni Vitikainen, Paavo Jyrkiäinen, Otto Ukkonen
 
 public class sevenznimi {
     public static void main(String[] args)throws IOException{
