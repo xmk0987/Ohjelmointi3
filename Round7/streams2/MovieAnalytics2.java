@@ -28,11 +28,16 @@ public class MovieAnalytics2 {
 
         movies.forEach(x -> {all_directors.add(x.getDirector());});
 
-        HashMap<String, Long> director_movies = (HashMap<String, Long>) all_directors.stream()
+        HashMap<String, Long> director_movies = (HashMap<String, Long>) all_directors
+                .stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        director_movies.entrySet().stream().sorted(Comparator.comparingDouble(Map.Entry<String, Long>::getValue).reversed().thenComparing(Map.Entry::getKey))
-                .limit(n).forEach(x-> System.out.format("%s: %d movies%n", x.getKey(), x.getValue()));
+        director_movies
+                .entrySet()
+                .stream()
+                .sorted(Comparator.comparingDouble(Map.Entry<String, Long>::getValue).reversed().thenComparing(Map.Entry::getKey))
+                .limit(n)
+                .forEach(x-> System.out.format("%s: %d movies%n", x.getKey(), x.getValue()));
 
 
     }
