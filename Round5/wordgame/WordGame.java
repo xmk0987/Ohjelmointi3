@@ -96,12 +96,18 @@ public class WordGame {
             if(state.getSecret_word().indexOf(Character.toUpperCase(c)) == -1
                     && state.getSecret_word().indexOf(Character.toLowerCase(c)) == -1){
                 state.mistakes ++;
+                if(state.mistakes > state.mistake_limit){
+                    state.word = state.secret_word;
+                }
                 return state;
             }
             else{
                 if(state.guessed_chars.contains(Character.toUpperCase(c)) ||
                         state.guessed_chars.contains(Character.toLowerCase(c))){
                     state.mistakes ++;
+                    if(state.mistakes > state.mistake_limit){
+                        state.word = state.secret_word;
+                    }
                     return state;
                 }
                 else{
@@ -142,6 +148,9 @@ public class WordGame {
             }
             else{
                 state.mistakes ++;
+                if(state.mistakes > state.mistake_limit){
+                    state.word = state.secret_word;
+                }
                 return state;
             }
 

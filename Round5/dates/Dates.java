@@ -15,6 +15,10 @@ public class Dates {
         private String end = "";
         private int diff = 0;
 
+        private DateDiff(){
+
+        }
+
         public String getStart(){
             return this.start;
         }
@@ -33,7 +37,7 @@ public class Dates {
 
     }
 
-    public static void DateDiff[] dateDiffs(String ...dateStrs) throws {
+    public static DateDiff[] dateDiffs(String ...dateStrs) {
 
     }
 
