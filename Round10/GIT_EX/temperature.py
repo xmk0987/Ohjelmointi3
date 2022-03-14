@@ -1,4 +1,3 @@
-
 def main():
 
     try:
@@ -17,12 +16,13 @@ def main():
 def t_transform(temp, type):
 
     if type == 'c':
-        return float(temp * 9/15 + 32)
+        return float(temp * 9/5 + 32)
     if type == 'f':
-        return float(temp*9/5+32)
+        return float((temp - 32)/(9/5))
 
     return None
 
 
 if __name__ == "__main__":
     main()
+
