@@ -9,21 +9,23 @@ import static org.junit.Assert.assertThrows;
 
 
 class AttainmentTest {
-    private final Attainment attainment = new Attainment("123", "12345", 5);
+    private final Attainment attainment = new Attainment("bbb", "bbbbbb", 5);
 
 
     @Test
     void compareTo() {
-        Attainment testAtt1 = new Attainment("bbb", "bbbb", 1);
-        Attainment testAtt2 = new Attainment("ccc", "cccc", 1);
-        Attainment testAtt3 = new Attainment("bbb", "bbbb", 1);
-        Attainment testAtt4 = new Attainment("aaa", "aaaa", 1);
+        Attainment testAtt1 = new Attainment("bbb", "bbb", 1);
+        Attainment testAtt2 = new Attainment("aaa", "bbb", 1);
+        Attainment testAtt3 = new Attainment("aaa", "aaa", 1);
+        Attainment testAtt4 = new Attainment("bbb", "ccc", 1);
 
-        Assertions.assertEquals(1, testAtt1.getCourseCode().compareTo(testAtt4.getCourseCode()));
-        if(testAtt1.getCourseCode().compareTo(testAtt3.getCourseCode()) == 0){
-            Assertions.assertEquals(1, testAtt1.getStudentNumber().compareTo(testAtt4.getStudentNumber()));
-        }
-        Assertions.assertEquals(-1, testAtt1.compareTo(testAtt2));
+
+        Assertions.assertEquals(-1, testAtt1.compareTo(testAtt4));
+        Assertions.assertEquals(1, testAtt1.compareTo(testAtt3));
+        Assertions.assertEquals(0, testAtt3.compareTo(testAtt3));
+        Assertions.assertEquals(1, testAtt1.compareTo(testAtt2));
+
+
     }
 
     @Test

@@ -46,29 +46,7 @@ public class Attainment implements Comparable<Attainment>{
         return String.format("%s %s %d", this.courseCode, this.studentNumber, this.grade);
     }
 
-    public static final Comparator<Attainment> CODE_STUDENT_CMP = new Comparator<Attainment>() {
-        @Override
-        public int compare(Attainment o1, Attainment o2) {
-            int cmp = o1.getCourseCode().compareTo(o2.getCourseCode());
-            if(cmp == 0){
-                cmp = o1.getStudentNumber().compareTo(o2.getStudentNumber());
-            }
-            return cmp;
-        }
-    };
 
-
-    public static final Comparator<Attainment> CODE_GRADE_CMP = new Comparator<Attainment>() {
-        @Override
-        public int compare(Attainment o1, Attainment o2) {
-            int cmp = o1.getCourseCode().compareTo(o2.getCourseCode());
-
-            if(cmp == 0){
-                cmp = Integer.compare(o2.getGrade(), o1.getGrade());
-            }
-            return cmp;
-        }
-    };
 
 
 }
