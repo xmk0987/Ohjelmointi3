@@ -9,7 +9,7 @@ import static org.junit.Assert.assertThrows;
 
 
 class AttainmentTest {
-    private final Attainment attainment = new Attainment("bbb", "bbbbbb", 5);
+    private final Attainment attainment = new Attainment("123", "12345", 5);
 
 
     @Test
