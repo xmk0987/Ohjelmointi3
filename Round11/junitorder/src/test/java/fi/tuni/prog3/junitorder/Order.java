@@ -1,3 +1,5 @@
+package fi.tuni.prog3.junitorder;
+
 import java.util.NoSuchElementException;
 
 public class Order {

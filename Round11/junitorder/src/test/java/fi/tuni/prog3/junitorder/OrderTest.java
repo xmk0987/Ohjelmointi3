@@ -1,3 +1,4 @@
+package fi.tuni.prog3.junitorder;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
